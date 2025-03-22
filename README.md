@@ -208,9 +208,7 @@ Download ได้ที่ https://www.virtualbox.org/wiki/Downloads
 ### Ubuntu Installation
 ใช้ Ubuntu 24.04.2 LTS เมื่อได้ไฟล์ .iso แล้ว ให้ติดตั้งบน VirtualBox ได้เลย
 Download ได้ที่ https://ubuntu.com/download/desktop#release-notes-NobleNumbat
-### การดึง Log
-กำหนด IP Interface LAN ของเครื่อง ให้อยู่ใน Subnet เดียวกันกับ Interface Router
-ทดสอบการเชื่อมต่อ การสื่อสาร โดยการ Ping ไปหากัน ทั้งจาก Router และ จากเครื่องเอง
+### ติดตั้ง Rsyslog
 เราจะใช้ Syslog ในการดึง ซึ่งต้องติดตั้ง Rsyslog ก่อน
 1. เปิด Terminal ใน Ubuntu รันคำสั่งเพื่อติดตั้ง
 ``` bash
@@ -243,4 +241,58 @@ sudo netstat -tulnp | grep 514
 udp   0   0 0.0.0.0:514     0.0.0.0:*    1234/rsyslogd
 tcp   0   0 0.0.0.0:514     0.0.0.0:*    1234/rsyslogd
 ```
-
+## ตั้งค่า Router ให้ส่ง Syslog มายัง Ubuntu
+1. ใช้ Putty ในการเข้าไป Config Router โดยการเลืิอก Serial COM ให้ตรงกับที่เชื่อมต่ออยู่
+2. กำหนด IP Interface LAN ของเครื่อง ให้อยู่ใน Subnet เดียวกันกับ Interface Router
+3. ทดสอบการเชื่อมต่อ การสื่อสาร โดยการ Ping ไปหากัน ทั้งจาก Router ไป Ubuntu และ Ubuntu ไป Router
+4. เข้าสู่โหมด Configure Terminal บน Cisco Router (ในโปรเจ็คนี้ใช้ Cisco Router ในการทดสอบ)
+``` bash
+enable
+configure terminal
+```
+5. ตั้งค่าระดับของ Syslog ที่ต้องการส่ง
+``` bash
+logging trap informational
+```
+6.  กำหนดให้ Cisco Router ส่ง Log ไปที่ Syslog Server (Ubuntu)
+``` bash
+logging host 192.168.1.100 transport udp port 514
+```
+(เปลี่ยน 192.168.1.100 เป็น IP ของ Interface LAN ที่ตั้งไว้)
+7. เปิดใช้งานการส่ง Log ไปยัง Syslog Server
+``` bash
+logging on
+```
+8. บันทึกการตั้งค่า
+``` bash
+write memory
+```
+## ตรวจสอบ Log ที่เข้ามาบน Ubuntu
+1. ดู Log แบบ Real-time
+``` bash
+sudo tail -f /var/log/syslog
+```
+ตัวอย่าง Log ที่ควรได้รับ:
+``` yaml
+Jan 01 12:00:00 cisco-router syslog: Interface GigabitEthernet0/1 UP
+Jan 01 12:00:05 cisco-router syslog: DHCP Lease Assigned - 192.168.1.10
+```
+2. ถ้าต้องการแยก Log ของ Cisco Router ไปยังไฟล์ /var/log/cisco.log
+``` bash
+sudo nano /etc/rsyslog.d/cisco.conf
+```
+เพิ่มบรรทัดนี้:
+``` bash
+if $fromhost-ip == '192.168.1.1' then /var/log/cisco.log
+& stop
+```
+(เปลี่ยน 192.168.1.1 เป็น IP ของ Cisco Router)
+บันทึกและปิดไฟล์ แล้วรีสตาร์ท rsyslog:
+``` bash
+sudo systemctl restart rsyslog
+```
+3. ดู Log จากไฟล์ Cisco โดยเฉพาะ
+``` bash
+sudo tail -f /var/log/cisco.log
+```
+4. Path ของไฟล์ Log จะอยู่ที่ /var/log/cisco.log ซึ่งจะใช้ระบุใน Promtail
