@@ -227,7 +227,7 @@ input(type="imudp" port="514")
 module(load="imtcp")
 input(type="imtcp" port="514")
 ```
-บันทึกและปิดไฟล์ (Ctrl + X → Y → Enter)
+บันทึกและปิดไฟล์ (Ctrl + X → Y → Enter)<br>
 3. รีสตาร์ท rsyslog เพื่อให้การตั้งค่ามีผล
 ``` bash
 sudo systemctl restart rsyslog
