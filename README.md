@@ -22,28 +22,28 @@ Download ได้ที่ https://grafana.com/grafana/download?platform=linux&
 3. ติดตั้งตามขั้นตอน
 
 Loki Installation
-Download ได้ที่ https://github.com/grafana/loki/releases/ 
+Download ได้ที่ https://github.com/grafana/loki/releases/<br>
 หรืออ่านวิธีติดตั้งอย่างละเอียดที่ https://grafana.com/docs/loki/latest/setup/install/local/
 1. หาหัวข้อ Assets
 2. ดาวน์โหลด Loki ที่เหมาะสมกับระบบปฏิบัติการ เช่น loki-windows-amd64.exe.zip
 3. แตกไฟล์ไว้ใน Folder
 4. ใน Command Line ให้เลือกไปที่ Folder ที่แตกไฟล์ไว้
-5. จากนั้นใช้คำสั่ง wget https://raw.githubusercontent.com/grafana/loki/main/cmd/loki/loki-local-config.yaml
+5. จากนั้นใช้คำสั่ง wget https://raw.githubusercontent.com/grafana/loki/main/cmd/loki/loki-local-config.yaml<br>
    เพื่อสร้าง configuration files (หากรันโค้ดไม่ได้ ให้ปรับเปลี่ยนคำสั่ง wget เพื่อให้เข้ากับโปรแกรมที่รันโค้ดแต่ยังใช้ URL เดิม)
-6. Start Loki ด้วย Command .\loki-windows-amd64.exe --config.file=loki-local-config.yaml
+6. Start Loki ด้วย Command .\loki-windows-amd64.exe --config.file=loki-local-config.yaml<br>
    หรือ ./loki-linux-amd64 -config.file=loki-local-config.yaml
    * ตัวไฟล์ .exe ต้องอยู่ใน Folder เดียวกันกับ Config File และการรันคำสั่งต้อง cd ไปที่ Folder นั้นก่อน
   
 Promtail Installation
-Download ได้ที่ https://github.com/grafana/loki/releases/ 
+Download ได้ที่ https://github.com/grafana/loki/releases/<br>
 หรืออ่านวิธีติดตั้งอย่างละเอียดที่ https://grafana.com/docs/loki/latest/setup/install/local/
 1. หาหัวข้อ Assets
 2. ดาวน์โหลด Promtail ที่เหมาะสมกับระบบปฏิบัติการ เช่น promtail-windows-amd64.exe.zip
 3. แตกไฟล์ไว้ใน Folder (เพื่อความสะดวกใช้ Folder เดียวกันกับ Loki ก็ได้)
 4. ใน Command Line ให้เลือกไปที่ Folder ที่แตกไฟล์ไว้
-5. จากนั้นใช้คำสั่ง wget https://raw.githubusercontent.com/grafana/loki/main/clients/cmd/promtail/promtail-local-config.yaml
+5. จากนั้นใช้คำสั่ง wget https://raw.githubusercontent.com/grafana/loki/main/clients/cmd/promtail/promtail-local-config.yaml<br>
    เพื่อสร้าง configuration files (หากรันโค้ดไม่ได้ ให้ปรับเปลี่ยนคำสั่ง wget เพื่อให้เข้ากับโปรแกรมที่รันโค้ดแต่ยังใช้ URL เดิม)
-6. Start Promtail ด้วย Command .\promtail-windows-amd64.exe --config.file=promtail-local-config.yaml
+6. Start Promtail ด้วย Command .\promtail-windows-amd64.exe --config.file=promtail-local-config.yaml<br>
    หรือ .\promtail-linux-amd64.exe --config.file=promtail-local-config.yaml
     * ตัวไฟล์ .exe ต้องอยู่ใน Folder เดียวกันกับ Config File และการรันคำสั่งต้อง cd ไปที่ Folder นั้นก่อน
 
