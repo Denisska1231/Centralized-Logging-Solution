@@ -4,7 +4,7 @@
 
 # Centralized-Logging-Solution
 
-โปรเจกต์นี้เป็นระบบ **Centralized Logging** โดยใช้ **Grafana, Loki และ Promtail** สำหรับเก็บและวิเคราะห์ Log จากระบบต่างๆ
+โปรเจกต์นี้เป็นระบบ **Centralized Logging** โดยใช้ **Grafana, Loki และ Promtail** สำหรับเก็บและวิเคราะห์ Log จากระบบต่างๆ<br>
 Github นี้ จัดทำโดย<br>
 **เจตพล กอบกำ**<br>
 **ณัฐชนน นันทศรี**
