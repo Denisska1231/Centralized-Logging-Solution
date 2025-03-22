@@ -199,14 +199,14 @@ scrape_configs:
 ## 📊 Dashboard Customization
 ### Group By
 1. ให้เลือก Transformation ที่อยู่ข้างกับ Queries
-<br>![Description](/Picture/image001.png)<br>
-<br>![Description](/Picture/image003.png)<br>
+<br>![Description](/Picture/image001.png)
+<br>![Description](/Picture/image003.png)
 2. เลื่อนลงมาล่างสุดให้กดเลือกให้เลือก Add Transformation หลังจากนั้นหา Transformation ที่ต้องการ
-<br>![Description](/Picture/image005.png)<br>
+<br>![Description](/Picture/image005.png)
 3. เลื่อนหาคำที่มี Extract Fields เพื่อใช้สำหรับ แยกค่าจากฟิลด์ที่มีข้อมูลรวมกัน
-<br>![Description](/Picture/image007.png)<br>
-4.เลื่อนหาคำที่มี Group to nested tables เพื่อเลือกคำที่เราต้องการจะหา และ คัดเลือกด้วย lable อะไร
-<br>![Description](/Picture/image009.png)<br>
+<br>![Description](/Picture/image007.png)
+4. เลื่อนหาคำที่มี Group to nested tables เพื่อเลือกคำที่เราต้องการจะหา และ คัดเลือกด้วย lable อะไร
+<br>![Description](/Picture/image009.png)
 ## 🧾 วิธีการดึง Logs จาก Router
 เราได้ใช้ Ubuntu ในการดึง Logs จึงต้องติดตั้ง VM เพื่อลง Ubuntu
 ### Virtual Box Installation
