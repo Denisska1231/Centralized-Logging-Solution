@@ -48,7 +48,7 @@ Download ได้ที่ https://github.com/grafana/loki/releases/<br>
 ## ⚙️ Configuration File
 ### Loki
 ```yaml
-auth_enabled: false
+auth_enabled: false  //กำหนดให้ Loki ไม่ใช้ระบบการยืนยันตัวตน
 
 server:
   http_listen_port: 3100
