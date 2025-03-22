@@ -199,7 +199,7 @@ scrape_configs:
 ## 📊 Dashboard Customization
 ### Group By
 1.ให้เลือก Transformation ที่อยู่ข้างกับ Queries
-![Description](/Picture/image001.png)
+<br>![Description](/Picture/image001.png)
 ## 🧾 วิธีการดึง Logs จาก Router
 เราได้ใช้ Ubuntu ในการดึง Logs จึงต้องติดตั้ง VM เพื่อลง Ubuntu
 ### Virtual Box Installation
