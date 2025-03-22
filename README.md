@@ -28,8 +28,7 @@ Download ได้ที่ https://github.com/grafana/loki/releases/<br>
 2. ดาวน์โหลด Loki ที่เหมาะสมกับระบบปฏิบัติการ เช่น loki-windows-amd64.exe.zip
 3. แตกไฟล์ไว้ใน Folder
 4. ใน Command Line ให้เลือกไปที่ Folder ที่แตกไฟล์ไว้
-5. ใช้คำสั่ง(Powershell) curl -O https://raw.githubusercontent.com/grafana/loki/main/clients/cmd/promtail/promtail-local-config.yaml<br>
-   เพื่อสร้าง configuration files
+5. สร้าง configuration files ด้วยคำสั่ง(Powershell) Invoke-WebRequest -Uri "https://raw.githubusercontent.com/grafana/loki/main/cmd/loki/loki-local-config.yaml" -OutFile "loki-local-config.yaml"
 6. Start Loki (แนะนำPowershell) ด้วย .\loki-windows-amd64.exe --config.file=loki-local-config.yaml<br>
    หรือ ./loki-linux-amd64 -config.file=loki-local-config.yaml
    * ตัวไฟล์ .exe ต้องอยู่ใน Folder เดียวกันกับ Config File และการรันคำสั่งต้อง cd ไปที่ Folder นั้นก่อน
@@ -41,8 +40,7 @@ Download ได้ที่ https://github.com/grafana/loki/releases/<br>
 2. ดาวน์โหลด Promtail ที่เหมาะสมกับระบบปฏิบัติการ เช่น promtail-windows-amd64.exe.zip
 3. แตกไฟล์ไว้ใน Folder (เพื่อความสะดวกใช้ Folder เดียวกันกับ Loki ก็ได้)
 4. ใน Command Line ให้เลือกไปที่ Folder ที่แตกไฟล์ไว้
-5. ใช้คำสั่ง(Powershell) curl -O https://raw.githubusercontent.com/grafana/loki/main/clients/cmd/promtail/promtail-local-config.yaml<br>
-   เพื่อสร้าง configuration files
+5. สร้าง configuration files ด้วยคำสั่ง(Powershell) Invoke-WebRequest -Uri "https://raw.githubusercontent.com/grafana/loki/main/clients/cmd/promtail/promtail-local-config.yaml" -OutFile "promtail-local-config.yaml"
 6. Start Promtail (แนะนำPowershell) ด้วย .\promtail-windows-amd64.exe --config.file=promtail-local-config.yaml<br>
    หรือ ./promtail-linux-amd64 -config.file=promtail-local-config.yaml
     * ตัวไฟล์ .exe ต้องอยู่ใน Folder เดียวกันกับ Config File และการรันคำสั่งต้อง cd ไปที่ Folder นั้นก่อน
