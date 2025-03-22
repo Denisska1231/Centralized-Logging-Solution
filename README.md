@@ -260,6 +260,7 @@ logging trap informational
 logging host 192.168.1.100 transport udp port 514
 ```
 (เปลี่ยน 192.168.1.100 เป็น IP ของ Interface LAN ที่ตั้งไว้)<br>
+
 7. เปิดใช้งานการส่ง Log ไปยัง Syslog Server
 ``` bash
 logging on
@@ -288,6 +289,7 @@ if $fromhost-ip == '192.168.1.1' then /var/log/cisco.log
 & stop
 ```
 (เปลี่ยน 192.168.1.1 เป็น IP ของ Cisco Router)<br>
+
 บันทึกและปิดไฟล์ แล้วรีสตาร์ท rsyslog:
 ``` bash
 sudo systemctl restart rsyslog
