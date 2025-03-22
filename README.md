@@ -97,8 +97,98 @@ frontend:
 querier:
   engine:
     enable_multi_variant_queries: true  # เปิดใช้งาน multi-variant queries
+```
+### Promtail
+```yaml
+server:
+  http_listen_port: 9080  # พอร์ต HTTP ที่ Promtail ใช้รับคำขอ
+  grpc_listen_port: 0  # ปิดการใช้งาน gRPC (ค่า 0 หมายถึงไม่เปิดใช้งาน)
 
+positions:
+  filename: /tmp/positions.yaml  # ไฟล์เก็บตำแหน่งล่าสุดของ log ที่อ่านไปแล้ว เพื่อป้องกันการอ่านซ้ำ
 
+clients:
+  - url: http://localhost:3100/loki/api/v1/push  # URL ของ Loki ที่ใช้รับ log จาก Promtail
 
+scrape_configs:
+- job_name: system  # ตั้งชื่อ job สำหรับการดึง log
+  static_configs:
+  - targets:
+      - localhost  # กำหนดเป้าหมายเป็นเครื่อง local
+    labels:
+      job: varlogs  # กำหนด label ให้กับ log ที่รวบรวม
+      __path__: /var/log/*log  # ระบุเส้นทางไฟล์ log ที่ต้องการอ่าน
+      stream: stdout  # กำหนด stream ให้ log เป็น stdout
+```
+โค้ดที่ใช้ในการทำ Project จะมีการเขียน Regex เพื่อทำการ Mapping โดยให้เนื้อหา Log Map กับ ระดับ Detected_Level ใน Grafana
+```yaml
+server:
+  http_listen_port: 9080  # พอร์ต HTTP ที่ Promtail ใช้รับคำขอ
+  grpc_listen_port: 0  # ปิดการใช้งาน gRPC (ค่า 0 หมายถึงไม่เปิดใช้งาน)
 
+positions:
+  filename: /tmp/positions.yaml  # ไฟล์เก็บตำแหน่งล่าสุดของ log ที่อ่านไปแล้ว เพื่อป้องกันการอ่านซ้ำ
 
+clients:
+  - url: http://localhost:3100/loki/api/v1/push  # URL ของ Loki ที่ใช้รับ log จาก Promtail
+
+scrape_configs:
+  - job_name: cisco-logs  # ตั้งชื่อ job สำหรับการดึง log จากอุปกรณ์ Cisco
+    static_configs:
+      - targets:
+          - localhost  # กำหนดเป้าหมายเป็นเครื่อง local
+        labels:
+          job: cisco  # กำหนด label ให้กับ log ที่รวบรวม
+          __path__: C:/logs/*.log  # ระบุเส้นทางไฟล์ log ของอุปกรณ์ Cisco ที่ต้องการอ่าน
+
+    pipeline_stages:
+      - regex:
+          expression: '^(?P<timestamp>\S+\s\S+\s\S+)\s(?P<ip>\S+)\s(?P<id>\d+):\s\*(?P<log_message>.*)$'  
+          # ใช้ regex เพื่อดึงข้อมูลจาก log โดยแยกเป็น timestamp, ip, id และข้อความ log
+
+      # แทนที่รหัส severity ต่างๆ ของ Cisco เป็นข้อความที่อ่านง่ายขึ้น
+      - replace:
+          expression: '(%SYS-0)'
+          replace: 'error %SYS-0'
+      - replace:
+          expression: '(%SYS-1)'
+          replace: 'error %SYS-1'
+      - replace:
+          expression: '(%SYS-2)'
+          replace: 'error %SYS-2'
+      - replace:
+          expression: '(%SYS-3)'
+          replace: 'error %SYS-3'
+      - replace:
+          expression: '(%SYS-4)'
+          replace: 'warning %SYS-4'
+      - replace:
+          expression: '(%SYS-5)'
+          replace: 'info %SYS-5'
+      - replace:
+          expression: '(%SYS-6)'
+          replace: 'info %SYS-6'
+      - replace:
+          expression: '(%SYS-7)'
+          replace: 'info %SYS-7'
+
+      # แปลงรหัส severity ของประเภท log อื่นๆ เช่น LINK, LINEPROTO, BGP, DHCPD, SEC, IP, OSPF
+      - replace:
+          expression: '(%LINK-3)'
+          replace: 'error %LINK-3'
+      - replace:
+          expression: '(%LINK-4)'
+          replace: 'warning %LINK-4'
+      - replace:
+          expression: '(%LINK-5)'
+          replace: 'info %LINK-5'
+      - replace:
+          expression: '(%LINK-6)'
+          replace: 'info %LINK-6'
+      - replace:
+          expression: '(%LINK-7)'
+          replace: 'info %LINK-7'
+      
+      # มีการแทนที่รหัส severity สำหรับหลายประเภท เช่น DSPRM, DHCPD, SEC, IP, OSPF
+      # เพื่อทำให้ log เข้าใจง่ายขึ้น โดยเปลี่ยนเป็น error, warning หรือ info ตามระดับความรุนแรง
+```
