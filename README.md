@@ -246,7 +246,7 @@ scrape_configs:
 <br>![Description](/Picture/image021.png)
 ### Pie Chart 
 ![Description](/Picture/image023.png)
-เลือก Visuallzations เป็น Pie chart โดยตัวเลือกที่ใช้จะเป็น   
+<br>เลือก Visuallzations เป็น Pie chart โดยตัวเลือกที่ใช้จะเป็น   
 
 - Value options  
 
