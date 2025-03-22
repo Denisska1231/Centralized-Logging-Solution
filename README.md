@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://github.com/user-attachments/assets/9fc5e7f2-16d8-4a79-82e4-fe4572ef81e0" alt="image">
+  <img src="https://github.com/user-attachments/assets/4376f6fe-0324-4a0b-89ed-bb5407a80c6f" alt="image">
 </p>
 
 # Centralized-Logging-Solution
