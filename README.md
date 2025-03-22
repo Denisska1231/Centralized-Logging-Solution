@@ -48,60 +48,55 @@ Download ได้ที่ https://github.com/grafana/loki/releases/<br>
 ## ⚙️ Configuration File
 ### Loki
 ```yaml
-auth_enabled: false  //กำหนดให้ Loki ไม่ใช้ระบบการยืนยันตัวตน
+auth_enabled: false  # ปิดระบบ authentication
 
 server:
-  http_listen_port: 3100
-  grpc_listen_port: 9096
-  log_level: debug
-  grpc_server_max_concurrent_streams: 1000
+  http_listen_port: 3100  # พอร์ตที่ Loki ใช้ให้บริการผ่าน HTTP
+  grpc_listen_port: 9096  # พอร์ตที่ Loki ใช้ให้บริการผ่าน gRPC
+  log_level: debug  # ระดับการแสดง log (debug, info, warn, error)
+  grpc_server_max_concurrent_streams: 1000  # จำนวน gRPC streams สูงสุดที่รับได้
 
 common:
-  instance_addr: 127.0.0.1
-  path_prefix: /tmp/loki
+  instance_addr: 127.0.0.1  # ที่อยู่ของอินสแตนซ์ Loki
+  path_prefix: /tmp/loki  # โฟลเดอร์เก็บข้อมูล
   storage:
     filesystem:
-      chunks_directory: /tmp/loki/chunks
-      rules_directory: /tmp/loki/rules
-  replication_factor: 1
+      chunks_directory: /tmp/loki/chunks  # ที่เก็บ log chunks
+      rules_directory: /tmp/loki/rules  # ที่เก็บไฟล์ rule
+  replication_factor: 1  # จำนวนสำเนาของข้อมูลที่ทำซ้ำ
   ring:
     kvstore:
-      store: inmemory
+      store: inmemory  # ใช้ memory store แทน disk
 
 query_range:
   results_cache:
     cache:
       embedded_cache:
-        enabled: true
-        max_size_mb: 100
+        enabled: true  # เปิดใช้งาน cache
+        max_size_mb: 100  # ขนาด cache สูงสุด 100MB
 
 limits_config:
-  metric_aggregation_enabled: true
+  metric_aggregation_enabled: true  # เปิดใช้งานการรวม metric
 
 schema_config:
   configs:
     - from: 2020-10-24
-      store: tsdb
-      object_store: filesystem
-      schema: v13
+      store: tsdb  # ใช้ TSDB ในการจัดเก็บ log
+      object_store: filesystem  # เก็บข้อมูลลงไฟล์ระบบ
+      schema: v13  # ใช้ schema version 13
       index:
-        prefix: index_
-        period: 24h
-
-pattern_ingester:
-  enabled: true
-  metric_aggregation:
-    loki_address: localhost:3100
+        prefix: index_  # ชื่อ index prefix
+        period: 24h  # index ใหม่จะถูกสร้างทุก 24 ชั่วโมง
 
 ruler:
-  alertmanager_url: http://localhost:9093
+  alertmanager_url: http://localhost:9093  # URL ของ Alertmanager ที่ใช้แจ้งเตือน
 
 frontend:
-  encoding: protobuf
+  encoding: protobuf  # ใช้ Protobuf ในการ encode ข้อมูล
 
 querier:
   engine:
-    enable_multi_variant_queries: true
+    enable_multi_variant_queries: true  # เปิดใช้งาน multi-variant queries
 
 
 
