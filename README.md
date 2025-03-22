@@ -44,7 +44,7 @@ Download ได้ที่ https://github.com/grafana/loki/releases/<br>
 5. จากนั้นใช้คำสั่ง wget https://raw.githubusercontent.com/grafana/loki/main/clients/cmd/promtail/promtail-local-config.yaml<br>
    เพื่อสร้าง configuration files (หากรันโค้ดไม่ได้ ให้ปรับเปลี่ยนคำสั่ง wget เพื่อให้เข้ากับโปรแกรมที่รันโค้ดแต่ยังใช้ URL เดิม)
 6. Start Promtail ด้วย Command .\promtail-windows-amd64.exe --config.file=promtail-local-config.yaml<br>
-   หรือ .\promtail-linux-amd64.exe --config.file=promtail-local-config.yaml
+   หรือ ./promtail-linux-amd64 -config.file=promtail-local-config.yaml
     * ตัวไฟล์ .exe ต้องอยู่ใน Folder เดียวกันกับ Config File และการรันคำสั่งต้อง cd ไปที่ Folder นั้นก่อน
 
 
