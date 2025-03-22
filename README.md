@@ -15,13 +15,13 @@
 ต้องติดตั้ง **Grafana** **Loki** **Promtail** ให้ครบทั้ง 3 ตัว จึงจะใช้งานได้
 แนะนำให้ติดตั้งทั้ง 3 ตัว ภายในเครื่องเดียวกัน เพื่อความง่ายและสะดวกในการใช้งาน
 
-Grafana Installation
+### Grafana Installation
 Download ได้ที่ https://grafana.com/grafana/download?platform=linux&edition=oss
 1. เลือก Edition เป็น OSS
 2. เลือกระบบปฏิบัติการที่เหมาะสมกับเครื่อง
 3. ติดตั้งตามขั้นตอน
 
-Loki Installation
+### Loki Installation
 Download ได้ที่ https://github.com/grafana/loki/releases/<br>
 หรืออ่านวิธีติดตั้งอย่างละเอียดที่ https://grafana.com/docs/loki/latest/setup/install/local/
 1. หาหัวข้อ Assets
@@ -34,7 +34,7 @@ Download ได้ที่ https://github.com/grafana/loki/releases/<br>
    หรือ ./loki-linux-amd64 -config.file=loki-local-config.yaml
    * ตัวไฟล์ .exe ต้องอยู่ใน Folder เดียวกันกับ Config File และการรันคำสั่งต้อง cd ไปที่ Folder นั้นก่อน
   
-Promtail Installation
+### Promtail Installation
 Download ได้ที่ https://github.com/grafana/loki/releases/<br>
 หรืออ่านวิธีติดตั้งอย่างละเอียดที่ https://grafana.com/docs/loki/latest/setup/install/local/
 1. หาหัวข้อ Assets
